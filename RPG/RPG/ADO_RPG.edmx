@@ -1,0 +1,804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RPGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Armes">
+          <Key>
+            <PropertyRef Name="ArmeID" />
+          </Key>
+          <Property Name="ArmeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PtsAttaque" Type="int" />
+        </EntityType>
+        <EntityType Name="ArmesJoueur">
+          <Key>
+            <PropertyRef Name="ArmeJoueurID" />
+          </Key>
+          <Property Name="ArmeJoueurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArmeID" Type="int" />
+          <Property Name="Quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="Armures">
+          <Key>
+            <PropertyRef Name="ArmureID" />
+          </Key>
+          <Property Name="ArmureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PtsDefense" Type="int" />
+        </EntityType>
+        <EntityType Name="ArmuresJoueur">
+          <Key>
+            <PropertyRef Name="ArmureJoueurID" />
+          </Key>
+          <Property Name="ArmureJoueurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArmureID" Type="int" />
+          <Property Name="Quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="Hero">
+          <Key>
+            <PropertyRef Name="HeroID" />
+          </Key>
+          <Property Name="HeroID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UtilisateurID" Type="int" />
+          <Property Name="PtsVie" Type="int" Nullable="false" />
+          <Property Name="PtsShield" Type="int" Nullable="false" />
+          <Property Name="PtsForce" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventaire">
+          <Key>
+            <PropertyRef Name="InventaireID" />
+          </Key>
+          <Property Name="InventaireID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HeroID" Type="int" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventaireID" Type="int" />
+          <Property Name="ArmeJoueurID" Type="int" />
+          <Property Name="ArmureJoueurID" Type="int" />
+          <Property Name="PotionJoueurID" Type="int" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UtilisateurID" Type="int" />
+          <Property Name="Message" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DatePublication" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Potions">
+          <Key>
+            <PropertyRef Name="PotionID" />
+          </Key>
+          <Property Name="PotionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PtsAttaque" Type="int" />
+          <Property Name="PtsDefense" Type="int" />
+        </EntityType>
+        <EntityType Name="PotionsJoueur">
+          <Key>
+            <PropertyRef Name="PotionJoueurID" />
+          </Key>
+          <Property Name="PotionJoueurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PotionID" Type="int" />
+          <Property Name="Quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeUtilisateur">
+          <Key>
+            <PropertyRef Name="TypeUtilisateurID" />
+          </Key>
+          <Property Name="TypeUtilisateurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="UtilisateurID" />
+          </Key>
+          <Property Name="UtilisateurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeUtilisateurID" Type="int" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inscription" Type="datetime" Nullable="false" />
+          <Property Name="Courriel" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__ArmesJoue__ArmeI__2E1BDC42">
+          <End Role="Armes" Type="Self.Armes" Multiplicity="0..1" />
+          <End Role="ArmesJoueur" Type="Self.ArmesJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Armes">
+              <PropertyRef Name="ArmeID" />
+            </Principal>
+            <Dependent Role="ArmesJoueur">
+              <PropertyRef Name="ArmeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArmuresJo__Armur__30F848ED">
+          <End Role="Armures" Type="Self.Armures" Multiplicity="0..1" />
+          <End Role="ArmuresJoueur" Type="Self.ArmuresJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Armures">
+              <PropertyRef Name="ArmureID" />
+            </Principal>
+            <Dependent Role="ArmuresJoueur">
+              <PropertyRef Name="ArmureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hero__Utilisateu__286302EC">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+          <End Role="Hero" Type="Self.Hero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="UtilisateurID" />
+            </Principal>
+            <Dependent Role="Hero">
+              <PropertyRef Name="UtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventair__HeroI__2B3F6F97">
+          <End Role="Hero" Type="Self.Hero" Multiplicity="0..1" />
+          <End Role="Inventaire" Type="Self.Inventaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hero">
+              <PropertyRef Name="HeroID" />
+            </Principal>
+            <Dependent Role="Inventaire">
+              <PropertyRef Name="HeroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ArmeJoueu__37A5467C">
+          <End Role="ArmesJoueur" Type="Self.ArmesJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArmesJoueur">
+              <PropertyRef Name="ArmeJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ArmeJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ArmureJou__38996AB5">
+          <End Role="ArmuresJoueur" Type="Self.ArmuresJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArmuresJoueur">
+              <PropertyRef Name="ArmureJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ArmureJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__Inventair__36B12243">
+          <End Role="Inventaire" Type="Self.Inventaire" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventaire">
+              <PropertyRef Name="InventaireID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="InventaireID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__PotionJou__398D8EEE">
+          <End Role="PotionsJoueur" Type="Self.PotionsJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PotionsJoueur">
+              <PropertyRef Name="PotionJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="PotionJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Message__Utilisa__1FCDBCEB">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="UtilisateurID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="UtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PotionsJo__Potio__33D4B598">
+          <End Role="Potions" Type="Self.Potions" Multiplicity="0..1" />
+          <End Role="PotionsJoueur" Type="Self.PotionsJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Potions">
+              <PropertyRef Name="PotionID" />
+            </Principal>
+            <Dependent Role="PotionsJoueur">
+              <PropertyRef Name="PotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilisate__TypeU__1CF15040">
+          <End Role="TypeUtilisateur" Type="Self.TypeUtilisateur" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUtilisateur">
+              <PropertyRef Name="TypeUtilisateurID" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="TypeUtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RPGModelStoreContainer">
+          <EntitySet Name="Armes" EntityType="Self.Armes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArmesJoueur" EntityType="Self.ArmesJoueur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Armures" EntityType="Self.Armures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArmuresJoueur" EntityType="Self.ArmuresJoueur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hero" EntityType="Self.Hero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventaire" EntityType="Self.Inventaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Potions" EntityType="Self.Potions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PotionsJoueur" EntityType="Self.PotionsJoueur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeUtilisateur" EntityType="Self.TypeUtilisateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ArmesJoue__ArmeI__2E1BDC42" Association="Self.FK__ArmesJoue__ArmeI__2E1BDC42">
+            <End Role="Armes" EntitySet="Armes" />
+            <End Role="ArmesJoueur" EntitySet="ArmesJoueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArmuresJo__Armur__30F848ED" Association="Self.FK__ArmuresJo__Armur__30F848ED">
+            <End Role="Armures" EntitySet="Armures" />
+            <End Role="ArmuresJoueur" EntitySet="ArmuresJoueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hero__Utilisateu__286302EC" Association="Self.FK__Hero__Utilisateu__286302EC">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Hero" EntitySet="Hero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventair__HeroI__2B3F6F97" Association="Self.FK__Inventair__HeroI__2B3F6F97">
+            <End Role="Hero" EntitySet="Hero" />
+            <End Role="Inventaire" EntitySet="Inventaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ArmeJoueu__37A5467C" Association="Self.FK__Items__ArmeJoueu__37A5467C">
+            <End Role="ArmesJoueur" EntitySet="ArmesJoueur" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ArmureJou__38996AB5" Association="Self.FK__Items__ArmureJou__38996AB5">
+            <End Role="ArmuresJoueur" EntitySet="ArmuresJoueur" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__Inventair__36B12243" Association="Self.FK__Items__Inventair__36B12243">
+            <End Role="Inventaire" EntitySet="Inventaire" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__PotionJou__398D8EEE" Association="Self.FK__Items__PotionJou__398D8EEE">
+            <End Role="PotionsJoueur" EntitySet="PotionsJoueur" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Message__Utilisa__1FCDBCEB" Association="Self.FK__Message__Utilisa__1FCDBCEB">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PotionsJo__Potio__33D4B598" Association="Self.FK__PotionsJo__Potio__33D4B598">
+            <End Role="Potions" EntitySet="Potions" />
+            <End Role="PotionsJoueur" EntitySet="PotionsJoueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilisate__TypeU__1CF15040" Association="Self.FK__Utilisate__TypeU__1CF15040">
+            <End Role="TypeUtilisateur" EntitySet="TypeUtilisateur" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RPGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arme">
+          <Key>
+            <PropertyRef Name="ArmeID" />
+          </Key>
+          <Property Name="ArmeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PtsAttaque" Type="Int32" />
+          <NavigationProperty Name="ArmesJoueurs" Relationship="Self.FK__ArmesJoue__ArmeI__2E1BDC42" FromRole="Armes" ToRole="ArmesJoueur" />
+        </EntityType>
+        <EntityType Name="ArmesJoueur">
+          <Key>
+            <PropertyRef Name="ArmeJoueurID" />
+          </Key>
+          <Property Name="ArmeJoueurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArmeID" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+          <NavigationProperty Name="Arme" Relationship="Self.FK__ArmesJoue__ArmeI__2E1BDC42" FromRole="ArmesJoueur" ToRole="Armes" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__ArmeJoueu__37A5467C" FromRole="ArmesJoueur" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Armure">
+          <Key>
+            <PropertyRef Name="ArmureID" />
+          </Key>
+          <Property Name="ArmureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PtsDefense" Type="Int32" />
+          <NavigationProperty Name="ArmuresJoueurs" Relationship="Self.FK__ArmuresJo__Armur__30F848ED" FromRole="Armures" ToRole="ArmuresJoueur" />
+        </EntityType>
+        <EntityType Name="ArmuresJoueur">
+          <Key>
+            <PropertyRef Name="ArmureJoueurID" />
+          </Key>
+          <Property Name="ArmureJoueurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArmureID" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+          <NavigationProperty Name="Armure" Relationship="Self.FK__ArmuresJo__Armur__30F848ED" FromRole="ArmuresJoueur" ToRole="Armures" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__ArmureJou__38996AB5" FromRole="ArmuresJoueur" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Hero">
+          <Key>
+            <PropertyRef Name="HeroID" />
+          </Key>
+          <Property Name="HeroID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UtilisateurID" Type="Int32" />
+          <Property Name="PtsVie" Type="Int32" Nullable="false" />
+          <Property Name="PtsShield" Type="Int32" Nullable="false" />
+          <Property Name="PtsForce" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Hero__Utilisateu__286302EC" FromRole="Hero" ToRole="Utilisateur" />
+          <NavigationProperty Name="Inventaires" Relationship="Self.FK__Inventair__HeroI__2B3F6F97" FromRole="Hero" ToRole="Inventaire" />
+        </EntityType>
+        <EntityType Name="Inventaire">
+          <Key>
+            <PropertyRef Name="InventaireID" />
+          </Key>
+          <Property Name="InventaireID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HeroID" Type="Int32" />
+          <NavigationProperty Name="Hero" Relationship="Self.FK__Inventair__HeroI__2B3F6F97" FromRole="Inventaire" ToRole="Hero" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__Inventair__36B12243" FromRole="Inventaire" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventaireID" Type="Int32" />
+          <Property Name="ArmeJoueurID" Type="Int32" />
+          <Property Name="ArmureJoueurID" Type="Int32" />
+          <Property Name="PotionJoueurID" Type="Int32" />
+          <NavigationProperty Name="ArmesJoueur" Relationship="Self.FK__Items__ArmeJoueu__37A5467C" FromRole="Items" ToRole="ArmesJoueur" />
+          <NavigationProperty Name="ArmuresJoueur" Relationship="Self.FK__Items__ArmureJou__38996AB5" FromRole="Items" ToRole="ArmuresJoueur" />
+          <NavigationProperty Name="Inventaire" Relationship="Self.FK__Items__Inventair__36B12243" FromRole="Items" ToRole="Inventaire" />
+          <NavigationProperty Name="PotionsJoueur" Relationship="Self.FK__Items__PotionJou__398D8EEE" FromRole="Items" ToRole="PotionsJoueur" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UtilisateurID" Type="Int32" />
+          <Property Name="Message1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatePublication" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Message__Utilisa__1FCDBCEB" FromRole="Message" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Potion">
+          <Key>
+            <PropertyRef Name="PotionID" />
+          </Key>
+          <Property Name="PotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PtsAttaque" Type="Int32" />
+          <Property Name="PtsDefense" Type="Int32" />
+          <NavigationProperty Name="PotionsJoueurs" Relationship="Self.FK__PotionsJo__Potio__33D4B598" FromRole="Potions" ToRole="PotionsJoueur" />
+        </EntityType>
+        <EntityType Name="PotionsJoueur">
+          <Key>
+            <PropertyRef Name="PotionJoueurID" />
+          </Key>
+          <Property Name="PotionJoueurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PotionID" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__PotionJou__398D8EEE" FromRole="PotionsJoueur" ToRole="Items" />
+          <NavigationProperty Name="Potion" Relationship="Self.FK__PotionsJo__Potio__33D4B598" FromRole="PotionsJoueur" ToRole="Potions" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeUtilisateur">
+          <Key>
+            <PropertyRef Name="TypeUtilisateurID" />
+          </Key>
+          <Property Name="TypeUtilisateurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Utilisateurs" Relationship="Self.FK__Utilisate__TypeU__1CF15040" FromRole="TypeUtilisateur" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="UtilisateurID" />
+          </Key>
+          <Property Name="UtilisateurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeUtilisateurID" Type="Int32" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Inscription" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Courriel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Heroes" Relationship="Self.FK__Hero__Utilisateu__286302EC" FromRole="Utilisateur" ToRole="Hero" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK__Message__Utilisa__1FCDBCEB" FromRole="Utilisateur" ToRole="Message" />
+          <NavigationProperty Name="TypeUtilisateur" Relationship="Self.FK__Utilisate__TypeU__1CF15040" FromRole="Utilisateur" ToRole="TypeUtilisateur" />
+        </EntityType>
+        <Association Name="FK__ArmesJoue__ArmeI__2E1BDC42">
+          <End Role="Armes" Type="Self.Arme" Multiplicity="0..1" />
+          <End Role="ArmesJoueur" Type="Self.ArmesJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Armes">
+              <PropertyRef Name="ArmeID" />
+            </Principal>
+            <Dependent Role="ArmesJoueur">
+              <PropertyRef Name="ArmeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ArmeJoueu__37A5467C">
+          <End Role="ArmesJoueur" Type="Self.ArmesJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArmesJoueur">
+              <PropertyRef Name="ArmeJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ArmeJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ArmuresJo__Armur__30F848ED">
+          <End Role="Armures" Type="Self.Armure" Multiplicity="0..1" />
+          <End Role="ArmuresJoueur" Type="Self.ArmuresJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Armures">
+              <PropertyRef Name="ArmureID" />
+            </Principal>
+            <Dependent Role="ArmuresJoueur">
+              <PropertyRef Name="ArmureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ArmureJou__38996AB5">
+          <End Role="ArmuresJoueur" Type="Self.ArmuresJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArmuresJoueur">
+              <PropertyRef Name="ArmureJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ArmureJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Hero__Utilisateu__286302EC">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+          <End Role="Hero" Type="Self.Hero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="UtilisateurID" />
+            </Principal>
+            <Dependent Role="Hero">
+              <PropertyRef Name="UtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventair__HeroI__2B3F6F97">
+          <End Role="Hero" Type="Self.Hero" Multiplicity="0..1" />
+          <End Role="Inventaire" Type="Self.Inventaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hero">
+              <PropertyRef Name="HeroID" />
+            </Principal>
+            <Dependent Role="Inventaire">
+              <PropertyRef Name="HeroID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__Inventair__36B12243">
+          <End Role="Inventaire" Type="Self.Inventaire" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventaire">
+              <PropertyRef Name="InventaireID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="InventaireID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__PotionJou__398D8EEE">
+          <End Role="PotionsJoueur" Type="Self.PotionsJoueur" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PotionsJoueur">
+              <PropertyRef Name="PotionJoueurID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="PotionJoueurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Message__Utilisa__1FCDBCEB">
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="UtilisateurID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="UtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PotionsJo__Potio__33D4B598">
+          <End Role="Potions" Type="Self.Potion" Multiplicity="0..1" />
+          <End Role="PotionsJoueur" Type="Self.PotionsJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Potions">
+              <PropertyRef Name="PotionID" />
+            </Principal>
+            <Dependent Role="PotionsJoueur">
+              <PropertyRef Name="PotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Utilisate__TypeU__1CF15040">
+          <End Role="TypeUtilisateur" Type="Self.TypeUtilisateur" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeUtilisateur">
+              <PropertyRef Name="TypeUtilisateurID" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="TypeUtilisateurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RPGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Armes" EntityType="Self.Arme" />
+          <EntitySet Name="ArmesJoueurs" EntityType="Self.ArmesJoueur" />
+          <EntitySet Name="Armures" EntityType="Self.Armure" />
+          <EntitySet Name="ArmuresJoueurs" EntityType="Self.ArmuresJoueur" />
+          <EntitySet Name="Heroes" EntityType="Self.Hero" />
+          <EntitySet Name="Inventaires" EntityType="Self.Inventaire" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Potions" EntityType="Self.Potion" />
+          <EntitySet Name="PotionsJoueurs" EntityType="Self.PotionsJoueur" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TypeUtilisateurs" EntityType="Self.TypeUtilisateur" />
+          <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+          <AssociationSet Name="FK__ArmesJoue__ArmeI__2E1BDC42" Association="Self.FK__ArmesJoue__ArmeI__2E1BDC42">
+            <End Role="Armes" EntitySet="Armes" />
+            <End Role="ArmesJoueur" EntitySet="ArmesJoueurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ArmeJoueu__37A5467C" Association="Self.FK__Items__ArmeJoueu__37A5467C">
+            <End Role="ArmesJoueur" EntitySet="ArmesJoueurs" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ArmuresJo__Armur__30F848ED" Association="Self.FK__ArmuresJo__Armur__30F848ED">
+            <End Role="Armures" EntitySet="Armures" />
+            <End Role="ArmuresJoueur" EntitySet="ArmuresJoueurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ArmureJou__38996AB5" Association="Self.FK__Items__ArmureJou__38996AB5">
+            <End Role="ArmuresJoueur" EntitySet="ArmuresJoueurs" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Hero__Utilisateu__286302EC" Association="Self.FK__Hero__Utilisateu__286302EC">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Hero" EntitySet="Heroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventair__HeroI__2B3F6F97" Association="Self.FK__Inventair__HeroI__2B3F6F97">
+            <End Role="Hero" EntitySet="Heroes" />
+            <End Role="Inventaire" EntitySet="Inventaires" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__Inventair__36B12243" Association="Self.FK__Items__Inventair__36B12243">
+            <End Role="Inventaire" EntitySet="Inventaires" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__PotionJou__398D8EEE" Association="Self.FK__Items__PotionJou__398D8EEE">
+            <End Role="PotionsJoueur" EntitySet="PotionsJoueurs" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Message__Utilisa__1FCDBCEB" Association="Self.FK__Message__Utilisa__1FCDBCEB">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PotionsJo__Potio__33D4B598" Association="Self.FK__PotionsJo__Potio__33D4B598">
+            <End Role="Potions" EntitySet="Potions" />
+            <End Role="PotionsJoueur" EntitySet="PotionsJoueurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Utilisate__TypeU__1CF15040" Association="Self.FK__Utilisate__TypeU__1CF15040">
+            <End Role="TypeUtilisateur" EntitySet="TypeUtilisateurs" />
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RPGModelStoreContainer" CdmEntityContainer="RPGEntities">
+          <EntitySetMapping Name="Armes">
+            <EntityTypeMapping TypeName="RPGModel.Arme">
+              <MappingFragment StoreEntitySet="Armes">
+                <ScalarProperty Name="ArmeID" ColumnName="ArmeID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="PtsAttaque" ColumnName="PtsAttaque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArmesJoueurs">
+            <EntityTypeMapping TypeName="RPGModel.ArmesJoueur">
+              <MappingFragment StoreEntitySet="ArmesJoueur">
+                <ScalarProperty Name="ArmeJoueurID" ColumnName="ArmeJoueurID" />
+                <ScalarProperty Name="ArmeID" ColumnName="ArmeID" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Armures">
+            <EntityTypeMapping TypeName="RPGModel.Armure">
+              <MappingFragment StoreEntitySet="Armures">
+                <ScalarProperty Name="ArmureID" ColumnName="ArmureID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="PtsDefense" ColumnName="PtsDefense" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArmuresJoueurs">
+            <EntityTypeMapping TypeName="RPGModel.ArmuresJoueur">
+              <MappingFragment StoreEntitySet="ArmuresJoueur">
+                <ScalarProperty Name="ArmureJoueurID" ColumnName="ArmureJoueurID" />
+                <ScalarProperty Name="ArmureID" ColumnName="ArmureID" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Heroes">
+            <EntityTypeMapping TypeName="RPGModel.Hero">
+              <MappingFragment StoreEntitySet="Hero">
+                <ScalarProperty Name="HeroID" ColumnName="HeroID" />
+                <ScalarProperty Name="UtilisateurID" ColumnName="UtilisateurID" />
+                <ScalarProperty Name="PtsVie" ColumnName="PtsVie" />
+                <ScalarProperty Name="PtsShield" ColumnName="PtsShield" />
+                <ScalarProperty Name="PtsForce" ColumnName="PtsForce" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventaires">
+            <EntityTypeMapping TypeName="RPGModel.Inventaire">
+              <MappingFragment StoreEntitySet="Inventaire">
+                <ScalarProperty Name="InventaireID" ColumnName="InventaireID" />
+                <ScalarProperty Name="HeroID" ColumnName="HeroID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="RPGModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="InventaireID" ColumnName="InventaireID" />
+                <ScalarProperty Name="ArmeJoueurID" ColumnName="ArmeJoueurID" />
+                <ScalarProperty Name="ArmureJoueurID" ColumnName="ArmureJoueurID" />
+                <ScalarProperty Name="PotionJoueurID" ColumnName="PotionJoueurID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="RPGModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="UtilisateurID" ColumnName="UtilisateurID" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+                <ScalarProperty Name="DatePublication" ColumnName="DatePublication" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Potions">
+            <EntityTypeMapping TypeName="RPGModel.Potion">
+              <MappingFragment StoreEntitySet="Potions">
+                <ScalarProperty Name="PotionID" ColumnName="PotionID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="PtsAttaque" ColumnName="PtsAttaque" />
+                <ScalarProperty Name="PtsDefense" ColumnName="PtsDefense" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PotionsJoueurs">
+            <EntityTypeMapping TypeName="RPGModel.PotionsJoueur">
+              <MappingFragment StoreEntitySet="PotionsJoueur">
+                <ScalarProperty Name="PotionJoueurID" ColumnName="PotionJoueurID" />
+                <ScalarProperty Name="PotionID" ColumnName="PotionID" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RPGModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeUtilisateurs">
+            <EntityTypeMapping TypeName="RPGModel.TypeUtilisateur">
+              <MappingFragment StoreEntitySet="TypeUtilisateur">
+                <ScalarProperty Name="TypeUtilisateurID" ColumnName="TypeUtilisateurID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateurs">
+            <EntityTypeMapping TypeName="RPGModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="UtilisateurID" ColumnName="UtilisateurID" />
+                <ScalarProperty Name="TypeUtilisateurID" ColumnName="TypeUtilisateurID" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Inscription" ColumnName="Inscription" />
+                <ScalarProperty Name="Courriel" ColumnName="Courriel" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>RPG Game</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/bootstrap/dist/css/bootstrap.css">
+
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <!-- External JS -->
+    <script defer src="~/jquery/dist/jquery.min.js"></script>
+    <script defer src="~/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Internal JS -->
+    @RenderSection("scripts", false)
+</body>
+</html>
